@@ -6,6 +6,7 @@
   margin-left: 20px;
   margin-right: 5px;
 }
-.cart-container {
+.shop-cart {
   flex: 0.2;
+  margin-left: 10px;
 }
