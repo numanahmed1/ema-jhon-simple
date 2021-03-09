@@ -1,12 +1,17 @@
 import React from "react";
+
 import "./Cart.css";
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, children }) => {
   const formatNumber = (num) => {
     const precision = num.toFixed(2);
     return Number(precision);
   };
-  const total = cart.reduce((total, prd) => total + prd.price, 0);
+  const total = cart.reduce(
+    (total, prd) => total + prd.price * prd.quantity,
+    0
+  );
+
   const totalPrice = formatNumber(total);
   //   let totalPrice = 0;
   //   for (let i = 0; i < cart.length; i++) {
@@ -33,6 +38,7 @@ const Cart = ({ cart }) => {
       <h5>Shipping Cost: {shippingCost}</h5>
       <h5>Tax + Vat: {tax}</h5>
       <h5>Total Price: ${grandTotal}</h5>
+      {children}
     </div>
   );
 };

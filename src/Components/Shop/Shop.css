@@ -1,4 +1,4 @@
-.shop-container {
+.box-container {
   display: flex;
 }
 .product-container {
@@ -6,7 +6,7 @@
   margin-left: 20px;
   margin-right: 5px;
 }
-.shop-cart {
+.shop-container {
   flex: 0.2;
   margin-left: 10px;
 }
