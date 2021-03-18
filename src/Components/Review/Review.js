@@ -10,6 +10,7 @@ import ReviewItem from "../ReviewItem/ReviewItem";
 import "./Review.css";
 import happyImage from "../../images/giphy.gif";
 import "./Review.css";
+import { useHistory } from "react-router";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
@@ -33,11 +34,9 @@ const Review = () => {
     setCart(newCart);
     removeFromDatabaseCart(productKey);
   };
-
-  const handlePlaceOrder = () => {
-    setCart([]);
-    setOrderPlaced(true);
-    processOrder();
+  const history = useHistory();
+  const handleProceedCheckout = () => {
+    history.push("/shipment");
   };
 
   let thankYou;
@@ -59,8 +58,8 @@ const Review = () => {
       </div>
       <div className="shop-container">
         <Cart cart={cart}>
-          <button onClick={handlePlaceOrder} className="review-btn">
-            Place Order
+          <button onClick={handleProceedCheckout} className="review-btn">
+            Proceed to checkout
           </button>
         </Cart>
       </div>
