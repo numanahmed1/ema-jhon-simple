@@ -23,7 +23,6 @@ function App() {
     >
       <Router>
         <Header></Header>
-        {loggedInUser.email}
         <Switch>
           <Route exact path="/">
             <Shop></Shop>

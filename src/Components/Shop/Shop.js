@@ -13,6 +13,7 @@ const Shop = () => {
   const first10 = fakeData.slice(0, 10);
   const [products, setProducts] = useState(first10);
   const [cart, setCart] = useState([]);
+  document.title = "Shop Details";
 
   useEffect(() => {
     const savedCart = getDatabaseCart();
@@ -49,6 +50,7 @@ const Shop = () => {
   return (
     <div className="box-container">
       <div className="product-container">
+        {products.length === 0 && <p>Loading...</p>}
         {products.map((product) => (
           <Product
             showCartBtn={true}

@@ -11,6 +11,7 @@ import {
 } from "./loginManager";
 
 function Login() {
+  document.title = "Login Page";
   const [newUser, setNewUser] = useState(false);
   const [user, setUser] = useState({
     isSignedIn: false,
@@ -90,6 +91,7 @@ function Login() {
   return (
     <div className="login">
       <h1>Login</h1>
+
       {user.isSignedIn ? (
         <button onClick={signOut}>Sign out</button>
       ) : (

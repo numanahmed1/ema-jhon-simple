@@ -13,6 +13,7 @@ import "./Review.css";
 import { useHistory } from "react-router";
 
 const Review = () => {
+  document.title = "Review Page";
   const [cart, setCart] = useState([]);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
