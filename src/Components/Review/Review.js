@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import fakeData from "../../fakeData";
 import {
   getDatabaseCart,
   processOrder,
@@ -15,18 +14,18 @@ import { useHistory } from "react-router";
 const Review = () => {
   document.title = "Review Page";
   const [cart, setCart] = useState([]);
-  const [orderPlaced, setOrderPlaced] = useState(false);
 
   useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
-    // const productCount = Object.values(savedCart);
-    const cartProducts = productKeys.map((key) => {
-      const product = fakeData.find((pd) => pd.key === key);
-      product.quantity = savedCart[key];
-      return product;
-    });
-    setCart(cartProducts);
+
+    fetch("https://fierce-shore-04831.herokuapp.com/productsByKeys", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productKeys),
+    })
+      .then((res) => res.json())
+      .then((data) => setCart(data));
   }, []);
 
   const handleRemoveProduct = (productKey) => {
@@ -40,10 +39,6 @@ const Review = () => {
     history.push("/shipment");
   };
 
-  let thankYou;
-  if (orderPlaced) {
-    thankYou = <img className="thank-you" src={happyImage} alt="Thank you" />;
-  }
   return (
     <div className="box-container">
       <div className="product-container">
@@ -55,7 +50,6 @@ const Review = () => {
             product={product}
           ></ReviewItem>
         ))}
-        {thankYou}
       </div>
       <div className="shop-container">
         <Cart cart={cart}>

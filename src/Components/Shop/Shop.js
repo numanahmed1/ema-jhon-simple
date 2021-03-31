@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import "./Shop.css";
-import fakeData from "../../fakeData";
 import Product from "../Product/Product";
 import Cart from "../Cart/Cart";
 import {
@@ -10,21 +9,26 @@ import {
 } from "../../utilities/databaseManager";
 
 const Shop = () => {
-  const first10 = fakeData.slice(0, 10);
-  const [products, setProducts] = useState(first10);
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   document.title = "Shop Details";
 
   useEffect(() => {
+    fetch("https://fierce-shore-04831.herokuapp.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
+
+  useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
-    const previousCart = productKeys.map((productKey) => {
-      const product = fakeData.find((pd) => pd.key === productKey);
-      product.quantity = savedCart[productKey];
-      return product;
-    });
-
-    setCart(previousCart);
+    fetch("https://fierce-shore-04831.herokuapp.com/productsByKeys", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productKeys),
+    })
+      .then((res) => res.json())
+      .then((data) => setCart(data));
   }, []);
 
   const handleAddProduct = (product) => {

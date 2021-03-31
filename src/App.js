@@ -15,7 +15,7 @@ export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-
+  document.title = "Ema Jhon App";
   return (
     <UserContext.Provider
       value={[loggedInUser, setLoggedInUser]}

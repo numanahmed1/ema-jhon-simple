@@ -8,7 +8,7 @@ const Cart = ({ cart, children }) => {
     return Number(precision);
   };
   const total = cart.reduce(
-    (total, prd) => total + prd.price * prd.quantity,
+    (total, prd) => total + prd.price * prd.quantity || 1,
     0
   );
 
